@@ -20,8 +20,14 @@ public class Gaussgeschuetz {
         matrix = null;
 
 
+
+       Mathe.fehlerabfangen(matrix);
+
+
         return matrix;
-    }
+
+
+        }
 
 
 }
