@@ -8,7 +8,7 @@
 	  
 	public class Filemanager   
 	{  
-	    public String[] readLines(String filename) throws IOException   
+	    public String[] readLines(String filename) throws IOException
 	    {  
 	        FileReader fileReader = new FileReader(filename);  
 	          
@@ -24,6 +24,9 @@
 	        bufferedReader.close();  
 	          
 	        return lines.toArray(new String[lines.size()]);  
-	    }     
+	    }
+
+
+
 	}  
 
