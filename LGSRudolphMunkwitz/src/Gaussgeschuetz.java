@@ -24,4 +24,4 @@ public class Gaussgeschuetz {
     }
 
 
-}//bitteschön ich zeig dir noch wie du änderungen hoch und runterlädst jo danke
+}
