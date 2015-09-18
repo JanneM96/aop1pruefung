@@ -5,14 +5,15 @@ public class Main {
 	public static void main(String[] args) {
 
         Mathe mathe = new Mathe();
-        /*
+/* #finger weg <3
         //unittest für mathe
         double [][] matrix;
         matrix= new double[][]{{1, 2, 3, 6},{0, 1, 4, 10},{0, 0, 1, 3}};
 
 
         Mathe.fehlerabfangen(matrix);
-        */
+        Mathe.dreiecksform(matrix);
+*/ //#finger weg <3
 
 		Filemanager fm = new Filemanager();  
         

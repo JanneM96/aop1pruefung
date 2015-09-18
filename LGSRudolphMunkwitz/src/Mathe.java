@@ -3,6 +3,7 @@
  */
 import javax.print.DocFlavor;
 import java.io.*;
+import java.util.Arrays;
 public class Mathe {
 
 
@@ -60,4 +61,66 @@ public class Mathe {
         System.out.println(msg);
         System.exit(0);
     }
+
+
+    public static void dreiecksform(double[][] matrix) {
+
+        if ( Mathe.testAufDreiecksform(matrix) == false ) {
+            System.out.print("1");
+            Mathe.dreiecksformErstellen(matrix);
+        }
+            double[] loesung = Mathe.dreiecksformAufloesen(matrix);
+            System.out.println(Arrays.toString(loesung));
+    }
+
+
+    private static double[] dreiecksformAufloesen(double[][] matrix) { //FALSCH
+
+        int a,b;
+        double[] speicher = new double[matrix.length];
+        for(a=matrix.length-1; a>0; a--){//index speicher ABER für xa unbedingt a+1 benutzen
+            double summe = matrix[a][matrix.length];
+            for(b=matrix.length-1; b<a; b++){
+                summe = summe - ( matrix[a][b] * speicher[b+1]); // -= ist wie sum =sum -
+            }
+            speicher[a] =(summe/matrix[a][a]);
+            summe = 0;
+        }
+        return speicher;
+    }
+
+    private static void dreiecksformErstellen(double[][] matrix) {
+        System.out.print("2");
+    }
+
+    private static boolean testAufDreiecksform(double[][] matrix) {
+
+        int a,b,c;
+        for (a=0;a < matrix.length ; a++) {
+            if (matrix[a][a] != 0) {
+                if (a == matrix.length -1) {
+                    System.out.println("win");
+                    //wenn alle diagonalelemente ungleich null sind
+                    //dann prüfen wir das alles links davon 0 sind
+                    for (b = 1; b < matrix.length; b++) {//0te / 1.te zeile egal, weil diagonalelem ganz links
+                        for ( c = b-1; c >= 0; c--) {
+                            if (matrix[b][c] != 0)
+                            {   System.out.println("ausgabe b:" + b + "und c: " + c);
+                                return false;
+                            }
+                        }
+                    }
+                    System.out.println("win");
+                    return true; //dreiecksform existiert schon
+                }
+            }else {
+                return false;//ein diaelem ist null
+            }
+
+
+        }
+        //eins der diaelem ist eine null
+        return false;
+    }
+
 }
