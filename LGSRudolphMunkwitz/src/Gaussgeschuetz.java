@@ -20,3 +20,5 @@ public class Gaussgeschuetz {
         return matrix;
     }
 }
+//Lieber Rudi, ich speichere die errechneten Daten für x1, x2, x3... in einer matrix namens speicher[],
+//speicher[0] ist x1, speicher[1] ist x2, .... du machst auch die ausgabe in die datei?

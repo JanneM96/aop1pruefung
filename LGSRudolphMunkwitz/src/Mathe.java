@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Mathe {
 
     /*
-    * Diese Funktion erfüllt die Funktioon einer kleinen Main, einer Art Ablaufplan,
+    * Diese Funktion erfüllt die Funktion einer Art kleiner Main/Ablaufplan,
     * damit die Matrix nur einmal übergeben werden muss, und der Programmablauf
     * ungestört und in der richtigen Reihenfolge bleibt
     */
@@ -15,24 +15,21 @@ public class Mathe {
         Mathe.fehlerabfangen(matrix);
         Mathe.dreiecksform(matrix);
     }
+
     /*
     * Diese Funktion fängt die formalen Fehler ab
     */
     public static void fehlerabfangen(double[][] matrix){
-        //Variablen
         int m, n;
         m = matrix.length; //Anzahl Zeilen
         n = matrix[0].length-1; //Anzahl Spalten ohne Ergebnisspalte
-
         //ist das LGS quadratisch?
         if(!(m == n)){
             Mathe.abbruch("LGS ist nicht quadratisch, Fehler");
         }
-
         //ist das LGS eindeutig lösbar?
         int a = 0;//Laufvariable Zeilen durchzählen
         int b = 0;//Laufvariable Spalten durchzählen
-
         //ist jedes elem einer zeile=0? + wenn letztes elem =0 => Trapezform .. != 0 unlösbar
         for(a=0; a<=m-1; a++){
             for(b=0; b<=n-1; b++){//Dadurch ist Ergebnis in letzter Spalte noch nicht betrachtet
@@ -80,13 +77,13 @@ public class Mathe {
     * Diese Funktion löst eine Matrix, die sich in Dreiecksform befindet
     * Sie wird auch in Mathe.dreiecksform aufgerufen
     */
-    private static double[] dreiecksformAufloesen(double[][] matrix){ //FALSCH #TODO
+    private static double[] dreiecksformAufloesen(double[][] matrix){
         int a,b;
         double[] speicher = new double[matrix.length];
-        for(a = matrix.length-1; a>0; a--){//a ist der Index im speicher ABER für xa (beim Lösen) unbedingt a+1 benutzen
-            double summe = matrix[a][matrix.length];
-            for(b = matrix.length-1; b<a; b++){
-                summe = summe - (matrix[a][b] * speicher[b+1]);
+        for(a = matrix.length-1; a>=0; a--){//a ist der Index im speicher ABER für xa (beim Lösen) unbedingt a+1 benutzen
+            double summe = matrix[a][matrix.length];//summe = Index der Ergebnisspalte
+            for (b = a; b < matrix.length - 1; b++){
+                summe = summe - (matrix[a][b+1] * speicher[b+1]);
             }
             speicher[a] = (summe / matrix[a][a]);
             summe = 0;
