@@ -94,31 +94,17 @@ public class Mathe {
     /*
     * Diese Funktion bildet aus einer beliebigen quadratischen Matrix die Dreiecksform
     */
-    private static void dreiecksformErstellen(double[][] matrix){//#TODO Test
-        int a, b, c, d;
-        a = b = c = d = 1;
-        if(matrix[a][b] == 0){//erstes Diagonalelement =0?
-            for(c = 1; c < matrix.length; c++){//c sorgt dafür, dass wir nicht nur Zeilen nacheinander vertauschen, sondern a mit jeder nachfolgenden
-                for (int k = 0; k < matrix.length; k++) {//einfacher Metrizenzeilentausch
-                    double tmp = matrix[a][k];
-                    matrix[a][k] = matrix[a+c][k];
-                    matrix[a+c][k] = tmp;
-                }
-            }
-            if(c == matrix.length){
-                Mathe.abbruch("Keine Dreiecksform erzeugbar, Fehler");
-            }
-        }else{
-            //#TODO
-        }
+    private static void dreiecksformErstellen(double[][] matrix){
+
     }
+
 
     /*
     * Diese Funktion prüft die Matrix auf Dreiecksform
     * return false : Matrix ist nicht in Dreiecksform
     * return true : Matrix ist in Dreiecksform
     */
-    private static boolean testAufDreiecksform(double[][] matrix) {//FALSCH #TODO
+    private static boolean testAufDreiecksform(double[][] matrix) {
         int a,b,c;
         for(a=0; a < matrix.length; a++){
             //prüfen der Diagonalelemente auf =! 0
