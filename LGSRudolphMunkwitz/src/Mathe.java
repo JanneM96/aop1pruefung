@@ -6,6 +6,11 @@ import java.io.*;
 import java.util.Arrays;
 public class Mathe {
 
+    /*
+    * Diese Funktion erfüllt die Funktioon einer kleinen Main, einer Art Ablaufplan,
+    * damit die Matrix nur einmal übergeben werden muss, und der Programmablauf
+    * ungestört und in der richtigen Reihenfolge bleibt
+    */
     public static void ablauf(double[][] matrix){
         Mathe.fehlerabfangen(matrix);
         Mathe.dreiecksform(matrix);
