@@ -92,10 +92,25 @@ public class Mathe {
     }
 
     /*
-    * Diese Funktion bildet aus einer beliebigen quadratischen Matrix die Dreiecksform derselben
+    * Diese Funktion bildet aus einer beliebigen quadratischen Matrix die Dreiecksform
     */
-    private static void dreiecksformErstellen(double[][] matrix){
-        //#TODO
+    private static void dreiecksformErstellen(double[][] matrix){//#TODO Test
+        int a, b, c, d;
+        a = b = c = d = 1;
+        if(matrix[a][b] == 0){//erstes Diagonalelement =0?
+            for(c = 1; c < matrix.length; c++){//c sorgt dafür, dass wir nicht nur Zeilen nacheinander vertauschen, sondern a mit jeder nachfolgenden
+                for (int k = 0; k < matrix.length; k++) {//einfacher Metrizenzeilentausch
+                    double tmp = matrix[a][k];
+                    matrix[a][k] = matrix[a+c][k];
+                    matrix[a+c][k] = tmp;
+                }
+            }
+            if(c == matrix.length){
+                Mathe.abbruch("Keine Dreiecksform erzeugbar, Fehler");
+            }
+        }else{
+            //#TODO
+        }
     }
 
     /*

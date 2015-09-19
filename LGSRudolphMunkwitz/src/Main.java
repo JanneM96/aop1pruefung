@@ -10,8 +10,7 @@ public class Main {
         double[][] matrix;
         matrix = new double[][]{{1, 2, 3, 6},{0, 1, 4, 10},{0, 0, 1, 3}};
 
-        Mathe.fehlerabfangen(matrix);
-        Mathe.dreiecksform(matrix);
+        Mathe.ablauf(matrix);
         //#finger weg <3
         */
 		Filemanager fm = new Filemanager();

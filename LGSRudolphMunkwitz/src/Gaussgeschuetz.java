@@ -16,7 +16,7 @@ public class Gaussgeschuetz {
         double [][] matrix;
         matrix = null;
 
-        Mathe.ablauf(matrix);//Ablaufplan der Mathe wird nur einmal aufgerufen
+        Mathe.ablauf(matrix);//Ablaufplan der Mathe wird einmal aufgerufen
         return matrix;
     }
 }
