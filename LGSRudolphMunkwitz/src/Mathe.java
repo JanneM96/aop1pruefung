@@ -6,121 +6,122 @@ import java.io.*;
 import java.util.Arrays;
 public class Mathe {
 
-
+    public static void ablauf(double[][] matrix){
+        Mathe.fehlerabfangen(matrix);
+        Mathe.dreiecksform(matrix);
+    }
     /*
-    * Diese Funktion fängt die formale Fehler ab
-    * @param matrix[][]
-    * @return null
-    * error abfangen
+    * Diese Funktion fängt die formalen Fehler ab
     */
-    public static void fehlerabfangen(double[][] matrix) {
+    public static void fehlerabfangen(double[][] matrix){
+        //Variablen
         int m, n;
-        m = matrix.length; //anzahl Zeilen
-        n = matrix[0].length - 1; //anzahl Spalten ohne ergebnis
-
+        m = matrix.length; //Anzahl Zeilen
+        n = matrix[0].length-1; //Anzahl Spalten ohne Ergebnisspalte
 
         //ist das LGS quadratisch?
-        if (!(m == n)) {
+        if(!(m == n)){
             Mathe.abbruch("LGS ist nicht quadratisch, Fehler");
         }
 
-        //ist das LGS eindeutig lösbar
-        //laufvariablen
-        int a = 0;//zeilen durchzählen
-        int b = 0;//spalten durchzählen
+        //ist das LGS eindeutig lösbar?
+        int a = 0;//Laufvariable Zeilen durchzählen
+        int b = 0;//Laufvariable Spalten durchzählen
 
-        //ist jedes elem der zeile=0? ja? letztes elem =0 => Trapezform .. != 0 unlösbar
-        for (a = 0; a <= m - 1; a++) {
-
-            for (b = 0; b <= n - 1; b++) {//ende ohne das ergebniss n+1 betrachtet zu haben
-                if (matrix[a][b] != 0) {
+        //ist jedes elem einer zeile=0? + wenn letztes elem =0 => Trapezform .. != 0 unlösbar
+        for(a=0; a<=m-1; a++){
+            for(b=0; b<=n-1; b++){//Dadurch ist Ergebnis in letzter Spalte noch nicht betrachtet
+                if(matrix[a][b] != 0){
                     break;
                 }
-
-                //wenn wir beim letzten element sind
-                //also alle € einer zeiler null sind dann betrachtet wir das letzte element
-                if ( b == n-1) {
-                    if (matrix[a][n] == 0 ) {
-                        //ergebnis 0 => zeile weg => trapezform =>mehrdeutig => error
+                //wir betrachten jetzt das letzte Element, wenn alle Elemente einer Zeile =0 sind
+                if(b == n-1){
+                    if(matrix[a][n] == 0){
+                        //Wenn das Ergebnis 0 ist, befindet sich die Matrix in einer Trapezform
                         Mathe.abbruch("Trapezform, mehrdeutig lösbar, Fehler");
-
-                    }
-                    else {
-                       Mathe.abbruch("Unlösbar, Fehler");
+                    }else{
+                        Mathe.abbruch("Unlösbar, Fehler");
                     }
                 }
-
-
             }
-
         }
     }
 
+    /*
+    * Diese Funktion erleichtert die Ausgabe von Fehlermeldungen
+    */
     public static void abbruch(String msg)
     {
         System.out.println(msg);
         System.exit(0);
     }
 
-
-    public static void dreiecksform(double[][] matrix) {
-
-        if ( Mathe.testAufDreiecksform(matrix) == false ) {
-            System.out.print("1");
+    /*
+    * Diese Funktion sorgt dafür, dass die Matrix in Dreiecksform umgewandelt wird
+    * Sie ruft dazu weitere Funktionen auf:
+    *   Mathe.testAufDreiecksform(matrix)
+    *   Mathe.dreiecksformErstellen(matrix)
+    *   Mathe.dreiecksformAufloesen(matrix)
+    */
+    public static void dreiecksform(double[][] matrix){
+        if(Mathe.testAufDreiecksform(matrix) == false){
             Mathe.dreiecksformErstellen(matrix);
         }
-            double[] loesung = Mathe.dreiecksformAufloesen(matrix);
-            System.out.println(Arrays.toString(loesung));
+        double[] loesung = Mathe.dreiecksformAufloesen(matrix);
+        System.out.println(Arrays.toString(loesung)); //vorläufige Ausgabe der Testwerte
     }
 
-
-    private static double[] dreiecksformAufloesen(double[][] matrix) { //FALSCH
-
+    /*
+    * Diese Funktion löst eine Matrix, die sich in Dreiecksform befindet
+    * Sie wird auch in Mathe.dreiecksform aufgerufen
+    */
+    private static double[] dreiecksformAufloesen(double[][] matrix){ //FALSCH #TODO
         int a,b;
         double[] speicher = new double[matrix.length];
-        for(a=matrix.length-1; a>0; a--){//index speicher ABER für xa unbedingt a+1 benutzen
+        for(a = matrix.length-1; a>0; a--){//a ist der Index im speicher ABER für xa (beim Lösen) unbedingt a+1 benutzen
             double summe = matrix[a][matrix.length];
-            for(b=matrix.length-1; b<a; b++){
-                summe = summe - ( matrix[a][b] * speicher[b+1]); // -= ist wie sum =sum -
+            for(b = matrix.length-1; b<a; b++){
+                summe = summe - (matrix[a][b] * speicher[b+1]);
             }
-            speicher[a] =(summe/matrix[a][a]);
+            speicher[a] = (summe / matrix[a][a]);
             summe = 0;
         }
         return speicher;
     }
 
-    private static void dreiecksformErstellen(double[][] matrix) {
-        System.out.print("2");
+    /*
+    * Diese Funktion bildet aus einer beliebigen quadratischen Matrix die Dreiecksform derselben
+    */
+    private static void dreiecksformErstellen(double[][] matrix){
+        //#TODO
     }
 
-    private static boolean testAufDreiecksform(double[][] matrix) {
-
+    /*
+    * Diese Funktion prüft die Matrix auf Dreiecksform
+    * return false : Matrix ist nicht in Dreiecksform
+    * return true : Matrix ist in Dreiecksform
+    */
+    private static boolean testAufDreiecksform(double[][] matrix) {//FALSCH #TODO
         int a,b,c;
-        for (a=0;a < matrix.length ; a++) {
-            if (matrix[a][a] != 0) {
-                if (a == matrix.length -1) {
-                    System.out.println("win");
-                    //wenn alle diagonalelemente ungleich null sind
-                    //dann prüfen wir das alles links davon 0 sind
-                    for (b = 1; b < matrix.length; b++) {//0te / 1.te zeile egal, weil diagonalelem ganz links
-                        for ( c = b-1; c >= 0; c--) {
-                            if (matrix[b][c] != 0)
-                            {   System.out.println("ausgabe b:" + b + "und c: " + c);
+        for(a=0; a < matrix.length; a++){
+            //prüfen der Diagonalelemente auf =! 0
+            if(matrix[a][a] != 0){
+                //a = letztes Diagonalelement:
+                if(a == matrix.length - 1){
+                    for (b = 1; b < matrix.length; b++) {//Start bei 1, weil 0te Zeile keine 0 braucht
+                        //testen der unteren Dreiecksmatrix ohne Diagonalelemente auf 0
+                        for(c = b-1; c >= 0; c--){
+                            if(matrix[b][c] != 0){
                                 return false;
                             }
                         }
                     }
-                    System.out.println("win");
-                    return true; //dreiecksform existiert schon
+                    return true;
                 }
-            }else {
-                return false;//ein diaelem ist null
+            }else{
+                return false;//Sobald mindestens ein Diagonalelement 0 ist
             }
-
-
         }
-        //eins der diaelem ist eine null
-        return false;
+        return false;//Sobald mindestens ein Diagonalelement 0 ist
     }
-
 }
