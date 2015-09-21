@@ -15,8 +15,12 @@ public class Gaussgeschuetz {
     public double[][] split(String[] input){
         double [][] matrix;
         matrix = null;
+        double [][] rechenmatrix;
+        rechenmatrix = null;
+        double [] vector;
+        vector = null;
 
-        Mathe.ablauf(matrix);//Ablaufplan der Mathe wird einmal aufgerufen
+        Mathe.ablauf(matrix, rechenmatrix, vector);//Ablaufplan der Mathe wird einmal aufgerufen
         return matrix;
     }
 }
