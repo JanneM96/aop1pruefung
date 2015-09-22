@@ -1,7 +1,3 @@
-/**
- * Created by Janne on 18.09.2015.
- */
-import javax.print.DocFlavor;
 import java.io.*;
 import java.util.Arrays;
 public class Mathe {
@@ -66,7 +62,7 @@ public class Mathe {
     *   Mathe.dreiecksformAufloesen(matrix)
     */
     public static void dreiecksform(double[][] matrix, double[][] rechenmatrix, double[] vector){
-        if(Mathe.testAufDreiecksform(matrix) == false){
+        if(!Mathe.testAufDreiecksform(matrix)){//= Mathe.testAufDreiecksform(matrix) == false
             Mathe.dreiecksformErstellen(matrix, rechenmatrix, vector);
         }
         double[] loesung = Mathe.dreiecksformAufloesen(matrix);

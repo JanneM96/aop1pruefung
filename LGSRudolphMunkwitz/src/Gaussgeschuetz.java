@@ -1,8 +1,4 @@
 import java.io.IOException;
-
-/**
- * Created by Alexander on 17.09.2015.
- */
 public class Gaussgeschuetz {
 
     public String[] getInput() throws IOException{
