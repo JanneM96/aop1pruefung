@@ -25,8 +25,9 @@
 	    }
 
 		public void writeToFile(double [] ergebnis) throws FileNotFoundException {
-			File f = new File("");
-			OutputStream ostream = new FileOutputStream(f);
+			File f = new File("LGSRudolphMunkwitz/Ausgabe.txt");
+			OutputStream output = new FileOutputStream(f);
+
 		}
 
 
