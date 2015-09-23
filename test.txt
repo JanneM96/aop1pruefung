@@ -1,5 +1,2 @@
-abcd
-dddfrr
-ass
-aa
-op
+3;4;8
+1;7;2

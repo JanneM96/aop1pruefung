@@ -1,8 +1,9 @@
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
         Mathe mathe = new Mathe();
 
 		Filemanager fm = new Filemanager();
@@ -10,7 +11,7 @@ public class Main {
           
         try  
         {  
-            String[] lines = fm.readLines(filename);  
+            String[] lines = fm.readFromFile(filename);
           
             for (String line : lines)   
             {  
@@ -21,6 +22,10 @@ public class Main {
         {
             System.out.println("Unable to create "+filename+": "+e.getMessage());                
         }
+
+        Gaussgeschuetz gs = new Gaussgeschuetz();
+        double [][] ausgabe = gs.getInput();
+        System.out.println(Arrays.deepToString(ausgabe));
 
     }  
 		
