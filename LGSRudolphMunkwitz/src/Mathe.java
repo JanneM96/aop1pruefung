@@ -106,12 +106,12 @@ public class Mathe {
     /*
     * Diese Funktion formt die Hilfsmatrizen um
     */
-    private static void zeilenUmformen(double[][] matrix, double[] vector){
-        int a;
-        int b;
-        for(b=0; b<matrix.length; b++){
-            for(a= b+1; b<matrix.length; b++){
-                zeilenSubtraktion(matrix[b][b], a, b, matrix, vector);
+    private static void zeilenUmformen(double[][] rechenmatrix, double[] vector){
+        int zeilenVar;
+        int zeile;
+        for(zeilenVar=0; zeilenVar<rechenmatrix.length; zeilenVar++){
+            for(zeile= zeilenVar+1; zeile<rechenmatrix.length; zeile++){
+                zeilenSubtraktion(rechenmatrix[zeile][zeile], zeilenVar, zeile, rechenmatrix, vector);
             }
         }
     }
@@ -119,9 +119,9 @@ public class Mathe {
     /*
     *Diese Methode subtrahiert zwei Zeilen
      */
-    private static void zeilenSubtraktion(double multFaktor, int zeilenVar, int zeile, double[][] matrix, double[] vector){
-        for (int column = 0; column < matrix[zeile].length; column++) {
-            matrix[zeile][column] = matrix[zeile][column] - multFaktor * matrix[zeilenVar][column];
+    private static void zeilenSubtraktion(double multFaktor, int zeilenVar, int zeile, double[][] rechenmatrix, double[] vector){
+        for (int c = 0; c < rechenmatrix.length; c++) {
+            rechenmatrix[zeile][c] = rechenmatrix[zeile][c] - multFaktor * rechenmatrix[zeilenVar][c];
         }
         vector[zeile] = vector[zeile] - multFaktor * vector[zeilenVar];
     }
