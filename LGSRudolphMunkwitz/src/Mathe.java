@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.Arrays;
 public class Mathe {
-
     /*
     * Diese Funktion erfüllt die Funktion einer Art kleiner Main/Ablaufplan,
     * damit die Matrix nur einmal übergeben werden muss, und der Programmablauf
@@ -68,7 +67,7 @@ public class Mathe {
     */
     public static double[] dreiecksform(double[][] matrix){
         if(!Mathe.testAufDreiecksform(matrix)){//= Mathe.testAufDreiecksform(matrix) == false
-            Mathe.dreiecksformErstellen(matrix);
+            Mathe.zeilenUmformen(matrix);
         }
         double[] loesung = Mathe.dreiecksformAufloesen(matrix);
         //System.out.println(Arrays.toString(loesung)); //vorläufige Ausgabe der Testwerte
@@ -76,123 +75,64 @@ public class Mathe {
     }
 
     /*
-    * Diese Funktion löst eine Matrix, die sich in Dreiecksform befindet
-    * Sie wird auch in Mathe.dreiecksform aufgerufen
-    */
-    private static double[] dreiecksformAufloesen(double[][] matrix){
-        int a,b;
-        double[] speicher = new double[matrix.length];
-        for(a = matrix.length-1; a>=0; a--){//a ist der Index im speicher ABER für xa (beim Lösen) unbedingt a+1 benutzen
-            double summe = matrix[a][matrix.length];//summe = Index der Ergebnisspalte
-            for (b = a; b < matrix.length - 1; b++){
-                summe = summe - (matrix[a][b+1] * speicher[b+1]);
-            }
-            speicher[a] = (summe / matrix[a][a]);
-            summe = 0;
-        }
-        return speicher;
-    }
-
-    /*
-    * Diese Funktion bildet aus einer beliebigen quadratischen Matrix die Dreiecksform
-    */
-    private static void dreiecksformErstellen(double[][] matrix){
-        double [][] rechenmatrix = Mathe.matrizenErstellen1(matrix);
-        double[] vector = Mathe.matrizenErstellen2(matrix);
-        Mathe.zeilenUmformen(rechenmatrix, vector);
-        Mathe.matrizenUmwandeln(matrix, rechenmatrix, vector);
-    }
-
-    /*
-    * Diese Funktion formt die Hilfsmatrizen um
-    */
-    private static void zeilenUmformen(double[][] rechenmatrix, double[] vector){
-        int zeilenVar;
-        int zeile;
-        for(zeilenVar=0; zeilenVar<rechenmatrix.length; zeilenVar++){
-            for(zeile= zeilenVar+1; zeile<rechenmatrix.length; zeile++){
-                zeilenSubtraktion(rechenmatrix[zeile][zeile], zeilenVar, zeile, rechenmatrix, vector);
-            }
-        }
-    }
-
-    /*
-    *Diese Methode subtrahiert zwei Zeilen
+    Diese Funktion prüft die Diagonale, vertauscht Zeilen und ruft dann die Division auf.
      */
-    private static void zeilenSubtraktion(double multFaktor, int zeilenVar, int zeile, double[][] rechenmatrix, double[] vector){
-        for (int c = 0; c < rechenmatrix.length; c++) {
-            rechenmatrix[zeile][c] = rechenmatrix[zeile][c] - multFaktor * rechenmatrix[zeilenVar][c];
-        }
-        vector[zeile] = vector[zeile] - multFaktor * vector[zeilenVar];
-    }
-
-    /*
-    * Diese Methode vertauscht zwei Zeilen
-    */
-    public static double [][] matrizenUmwandeln(double[][] matrix, double[][] rechenmatrix, double[] vector) {
+    private static double[][] zeilenUmformen(double[][] matrix) {
         int a, b, c;
-        for(a=0; a<matrix.length; a++){//rechenmatrix wird in matrix eingefügt
-            for(b=0; b<matrix.length; b++){
-                matrix[a][b]=rechenmatrix[a][b];
+        double[] hilfe=new double[matrix.length];//Hilfearray zum zeilentausch
+        //Diagonale auf 0en überprüfen, so tauschen, dass keine 0en mehr darin vorkommen
+        for(a=0; a<matrix.length; a++){//Laufvariable um diagonale zu überprüfen
+            for(b=1; b<matrix.length-1; b++){//Laufvariable zum zeilentausch, um tausch mit jeder Zeile zu ermöglichen
+                if(matrix[a][a]==0){
+                    for(c=0; c<matrix.length; c++){//Laufvariable, um jede spalte umzuschreiben
+                        hilfe[c]=matrix[a][c];//Zeilentausch
+                        matrix[a][c]=matrix[a+b][c];
+                        matrix[a+b][c]=hilfe[c];
+                    }
+                }
+            }
+            if(matrix[a][a]==0){
+                Mathe.abbruch("Fehler, Umformung nicht möglich!");
             }
         }
-        for(c=0; c<matrix.length; c++) {//vector wird in ergebnisspalte matrix eingefügt
-            matrix[c][matrix.length]=vector[c];
+        //erneutes durchgehen durch die nun umgeformte matrix, nun werden alle elemente unter der diagonalen zu 0 gemacht
+        for(a=0; a<matrix.length; a++){
+            Mathe.zeilenDividieren(matrix, a, a);
         }
         return matrix;
     }
 
     /*
-     * Diese Methode vertauscht zwei Zeilen
+    Diese Funktion dividiert zwei komplette Zeilen miteinander, um unter der diagonalen bei jedem element 0 zu erreichen
      */
-    private static void zeilenVertauschen(int tauschZeile1, int tauschZeile2, double[][] rechenmatrix, double[] vector) {
-        double[] hilfsZeile;
-        double hilfsVariable;
-
-        hilfsZeile = rechenmatrix[tauschZeile1];
-        hilfsVariable = vector[tauschZeile1];
-
-        rechenmatrix[tauschZeile1] = rechenmatrix[tauschZeile2];
-        vector[tauschZeile1] = vector[tauschZeile2];
-
-        rechenmatrix[tauschZeile2] = hilfsZeile;
-        vector[tauschZeile2] = hilfsVariable;
-    }
-
-    /*
-     * Diese Methode dividiert eine Zeile durch den divisor != 0 geteilt
-     */
-    private static void dividieren(int c, double divisor, double[][] rechenmatrix, double[] vector) {
-        for (int a = 0; a < rechenmatrix[c].length; a++) {
-            rechenmatrix[c][a] = rechenmatrix[c][a] / divisor;
-        }
-        vector[c] = vector[c] / divisor;
-    }
-
-    /*
-    * Diese Funktion erstellt die erste Hilfsmatrize zur Berechnung der Dreiecksform
-    */
-    private static double [][] matrizenErstellen1(double[][] matrix){
-        double[][] rechenmatrix = new double[matrix.length][matrix.length];
-        int a, b;
-        for(a=0; a<matrix.length; a++){
-            for(b=0; b<matrix.length; b++){
-                rechenmatrix[a][b] = matrix[a][b];
+    private static double[][] zeilenDividieren(double[][] matrix, int zeile1, int spalte){
+        int zeile2, g, s;
+        double faktor;
+        for(zeile2 = zeile1 + 1; zeile2 < matrix.length; zeile2++){//g zählt zeilen mit, die nacheinander durchgegangen werden müssen
+            faktor = -( matrix[zeile2][spalte] / matrix[zeile1][spalte] );
+            for(s=spalte; s<=matrix.length; s++){
+                matrix[zeile2][s] = (matrix[zeile1][s] * faktor) + matrix[zeile2][s];
             }
         }
-        return rechenmatrix;
+        return matrix;
     }
 
     /*
-   * Diese Funktion erstellt die zweite Hilfsmatrize zur Berechnung der Dreiecksform
-   */
-    private static double [] matrizenErstellen2(double[][] matrix){
-        double[] vector = new double[matrix.length];
-        int a;
-        for(a=0; a<matrix.length; a++){
-            vector[a] = matrix[a][matrix.length];
+    * Diese Funktion löst eine Matrix, die sich in Dreiecksform befindet
+    * Sie wird auch in Mathe.dreiecksform aufgerufen
+    */
+    private static double[] dreiecksformAufloesen(double[][] matrix) {
+        int a, b;
+        double[] speicher = new double[matrix.length];
+        for (a = matrix.length - 1; a >= 0; a--) {//a ist der Index im speicher ABER für xa (beim Lösen) unbedingt a+1 benutzen
+            double summe = matrix[a][matrix.length];//summe = Index der Ergebnisspalte
+            for (b = a; b < matrix.length - 1; b++) {
+                summe = summe - (matrix[a][b + 1] * speicher[b + 1]);
+            }
+            speicher[a] = (summe / matrix[a][a]);
+            summe = 0;
         }
-        return vector;
+        return speicher;
     }
 
     /*
