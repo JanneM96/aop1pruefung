@@ -4,17 +4,23 @@ import java.io.IOException;
  * Created by Alexander on 17.09.2015.
  */
 
-public class Gaussgeschuetz {
+public class Controller {
 
-    public double[][] getInput() throws IOException{
+    public double[][] getInput(String filename) throws IOException
+    {
         Filemanager fm = new Filemanager();
-        String filename = "LGSRudolphMunkwitz/Eingabe.txt";
         String[] lines = fm.readFromFile(filename);
-        double[][] splitted = Gaussgeschuetz.split(lines);
+        System.out.println("Eingegebenes LGS:");
+        for (String line : lines)
+        {
+            System.out.println(line);
+        }
+        double[][] splitted = Controller.split(lines);
         return splitted;
     }
 
-    public static double[][] split(String[] input){
+    private static double[][] split(String[] input)
+    {
         int linesLength = input.length;
         int zeile = 0;
         double [][] matrix = new double[linesLength][linesLength + 1];
@@ -31,13 +37,22 @@ public class Gaussgeschuetz {
             {
                 matrix [i][j] = Double.parseDouble(splitted[i]);
             }
-
         }
-
-
-        //Mathe.ablauf(matrix, rechenmatrix, vector);//Ablaufplan der Mathe wird einmal aufgerufen
+       // Mathe.ablauf(matrix, rechenmatrix, vector);//Ablaufplan der Mathe wird einmal aufgerufen
         return matrix;
     }
+
+    public void doOutput(double[] dErgebnis)
+    {
+        String [] umgewandelt = null;
+        for (int i = 0; i < dErgebnis.length; i++)
+        {
+            umgewandelt[i] = String.valueOf(dErgebnis[i]);
+        }
+        Filemanager fm = new Filemanager();
+        fm.writeToFile(umgewandelt);
+    }
+
 }
 //Lieber Rudi, ich speichere die errechneten Daten für x1, x2, x3... in einer matrix namens speicher[],
 //speicher[0] ist x1, speicher[1] ist x2, .... du machst auch die ausgabe in die datei?

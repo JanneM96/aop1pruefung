@@ -7,7 +7,11 @@ public class Mathe {
     * damit die Matrix nur einmal übergeben werden muss, und der Programmablauf
     * ungestört und in der richtigen Reihenfolge bleibt
     */
-    public static void ablauf(double[][] matrix, double[][] rechenmatrix, double[] vector){
+    public static void ablauf(double[][] matrix){
+        double [][] rechenmatrix;
+        rechenmatrix = null;
+        double [] vector;
+        vector = null;
         Mathe.fehlerabfangen(matrix);
         Mathe.dreiecksform(matrix, rechenmatrix, vector);
     }
