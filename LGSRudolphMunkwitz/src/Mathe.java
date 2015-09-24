@@ -164,13 +164,13 @@ public class Mathe {
     */
     public static double [][] matrizenUmwandeln(double[][] matrix, double[][] rechenmatrix, double[] vector) {
         int a, b, c;
-        for(a=0; a<matrix.length; a++){
+        for(a=0; a<matrix.length; a++){//rechenmatrix wird zu matrix ohne ergebnisspalte
             for(b=0; b<matrix.length; b++){
                 matrix[a][b]=rechenmatrix[a][b];
             }
         }
-        for(c=0; c<matrix.length; c++) {
-            matrix[c][matrix.length-1]=vector[c];
+        for(c=0; c<matrix.length; c++) {//vector wird zu ergebnisspalte der matrix
+            matrix[c][matrix.length]=vector[c];
         }
         return matrix;
     }
