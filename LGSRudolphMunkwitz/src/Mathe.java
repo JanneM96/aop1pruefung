@@ -8,7 +8,7 @@ public class Mathe {
     * ungestört und in der richtigen Reihenfolge bleibt
     */
     public static double[] ablauf(double[][] matrix){
-        double [][] rechenmatrix = new double[matrix.length][matrix.length+1];
+        double [][] rechenmatrix = new double[matrix.length][matrix.length];
         //rechenmatrix = null;
         double [] vector = new double[matrix.length];
         //vector = null;
@@ -108,7 +108,7 @@ public class Mathe {
     */
     private static void zeilenUmformen(double[][] rechenmatrix, double[] vector){
         // Spalte, welche eine Zahl ungleich null besitzt
-        int merkeSpalte = -1;
+        int merkeSpalte = 0;
 
         // Alle Zeilen a durchgehen
         for (int a = 0; a < rechenmatrix.length; a++) {
