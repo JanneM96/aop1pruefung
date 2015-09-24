@@ -81,18 +81,22 @@ public class Mathe {
         int a, b, c;
         double[] hilfe=new double[matrix.length];//Hilfearray zum zeilentausch
         //Diagonale auf 0en überprüfen, so tauschen, dass keine 0en mehr darin vorkommen
-        for(a=0; a<matrix.length; a++){//Laufvariable um diagonale zu überprüfen
-            for(b=1; b<matrix.length-1; b++){//Laufvariable zum zeilentausch, um tausch mit jeder Zeile zu ermöglichen
-                if(matrix[a][a]==0){
-                    for(c=0; c<matrix.length; c++){//Laufvariable, um jede spalte umzuschreiben
-                        hilfe[c]=matrix[a][c];//Zeilentausch
-                        matrix[a][c]=matrix[a+b][c];
-                        matrix[a+b][c]=hilfe[c];
+        for(a=0; a<matrix.length; a++) {//Laufvariable um diagonale zu überprüfen
+            for (b = 1; b < matrix.length - 1; b++) {//Laufvariable zum zeilentausch, um tausch mit jeder Zeile zu ermöglichen
+                if (matrix[a][a] == 0) {
+                    for (c = 0; c < matrix.length; c++) {//Laufvariable, um jede spalte umzuschreiben
+                        hilfe[c] = matrix[a][c];//Zeilentausch
+                        matrix[a][c] = matrix[a + b][c];
+                        matrix[a + b][c] = hilfe[c];
                     }
                 }
-            }
-            if(matrix[a][a]==0){
-                Mathe.abbruch("Fehler, Umformung nicht möglich!");
+                if (matrix[a][a] == 0) {
+                    for (c = 0; c < matrix.length; c++) {//Laufvariable, um jede spalte umzuschreiben
+                        hilfe[c] = matrix[a][c];//Zeilentausch
+                        matrix[a][c] = matrix[a - b][c];
+                        matrix[a - b][c] = hilfe[c];
+                    }
+                }
             }
         }
         //erneutes durchgehen durch die nun umgeformte matrix, nun werden alle elemente unter der diagonalen zu 0 gemacht
