@@ -7,13 +7,14 @@ public class Mathe {
     * damit die Matrix nur einmal übergeben werden muss, und der Programmablauf
     * ungestört und in der richtigen Reihenfolge bleibt
     */
-    public static void ablauf(double[][] matrix){
-        double [][] rechenmatrix;
-        rechenmatrix = null;
-        double [] vector;
-        vector = null;
+    public static double[] ablauf(double[][] matrix){
+        double [][] rechenmatrix = new double[matrix.length][matrix.length+1];
+        //rechenmatrix = null;
+        double [] vector = new double[matrix.length];
+        //vector = null;
         Mathe.fehlerabfangen(matrix);
-        Mathe.dreiecksform(matrix, rechenmatrix, vector);
+        double[] loesung = Mathe.dreiecksform(matrix);
+        return(loesung);
     }
 
     /*
@@ -65,12 +66,13 @@ public class Mathe {
     *   Mathe.dreiecksformErstellen(matrix)
     *   Mathe.dreiecksformAufloesen(matrix)
     */
-    public static void dreiecksform(double[][] matrix, double[][] rechenmatrix, double[] vector){
+    public static double[] dreiecksform(double[][] matrix){
         if(!Mathe.testAufDreiecksform(matrix)){//= Mathe.testAufDreiecksform(matrix) == false
-            Mathe.dreiecksformErstellen(matrix, rechenmatrix, vector);
+            Mathe.dreiecksformErstellen(matrix);
         }
         double[] loesung = Mathe.dreiecksformAufloesen(matrix);
-        System.out.println(Arrays.toString(loesung)); //vorläufige Ausgabe der Testwerte
+        //System.out.println(Arrays.toString(loesung)); //vorläufige Ausgabe der Testwerte
+        return (loesung);
     }
 
     /*
@@ -94,9 +96,9 @@ public class Mathe {
     /*
     * Diese Funktion bildet aus einer beliebigen quadratischen Matrix die Dreiecksform
     */
-    private static void dreiecksformErstellen(double[][] matrix, double[][] rechenmatrix, double[] vector){
-        Mathe.matrizenErstellen1(matrix);
-        Mathe.matrizenErstellen2(matrix);
+    private static void dreiecksformErstellen(double[][] matrix){
+        double [][] rechenmatrix = Mathe.matrizenErstellen1(matrix);
+        double[] vector = Mathe.matrizenErstellen2(matrix);
         Mathe.zeilenUmformen(rechenmatrix, vector);
         Mathe.matrizenUmwandeln(matrix, rechenmatrix, vector);
     }

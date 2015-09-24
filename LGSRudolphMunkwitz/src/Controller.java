@@ -35,7 +35,7 @@ public class Controller {
             int spalten = splitted.length;
             for (int j = 0; j < spalten; j++)
             {
-                matrix [i][j] = Double.parseDouble(splitted[i]);
+                matrix [i][j] = Double.parseDouble(splitted[j]);
             }
         }
        // Mathe.ablauf(matrix, rechenmatrix, vector);//Ablaufplan der Mathe wird einmal aufgerufen

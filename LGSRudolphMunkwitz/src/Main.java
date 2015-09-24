@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
         System.out.println("Dateipfad für Eingabe auswählen:");
         System.out.println("1.Standarddateipfad (\"LGSRudolphMunkwitz/Eingabe.txt\")");
         System.out.println("2.Anderer Pfad \n");
 
         boolean erfolg = false;
-        int eingabe2 = 0;
-        do {
+        int eingabe2 = 1;
+        /*do {
             do {
                 System.out.println("Auswahl: ");
                 Scanner auswahl = new Scanner(System.in);
@@ -30,11 +30,16 @@ public class Main {
                 System.out.println("Eingabefehler: Ungültige Auswahl\n");
             }
         }while (eingabe2 < 1 || eingabe2 > 2);
+        */
         switch (eingabe2){
             case 1:
                 Controller control = new Controller();
+
                 double [][] input = control.getInput("LGSRudolphMunkwitz/Eingabe.txt");
-                Mathe.ablauf(input);
+                System.out.println(Arrays.deepToString(input));
+
+                double[] loesung = Mathe.ablauf(input);
+                System.out.println(Arrays.toString(loesung));
 
                 return;
             case 2:
