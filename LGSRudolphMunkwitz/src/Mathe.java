@@ -164,12 +164,12 @@ public class Mathe {
     */
     public static double [][] matrizenUmwandeln(double[][] matrix, double[][] rechenmatrix, double[] vector) {
         int a, b, c;
-        for(a=0; a<matrix.length; a++){//rechenmatrix wird zu matrix ohne ergebnisspalte
+        for(a=0; a<matrix.length; a++){//rechenmatrix wird in matrix eingefügt
             for(b=0; b<matrix.length; b++){
                 matrix[a][b]=rechenmatrix[a][b];
             }
         }
-        for(c=0; c<matrix.length; c++) {//vector wird zu ergebnisspalte der matrix
+        for(c=0; c<matrix.length; c++) {//vector wird in ergebnisspalte matrix eingefügt
             matrix[c][matrix.length]=vector[c];
         }
         return matrix;
@@ -206,11 +206,10 @@ public class Mathe {
     * Diese Funktion erstellt die erste Hilfsmatrize zur Berechnung der Dreiecksform
     */
     private static double [][] matrizenErstellen1(double[][] matrix){
-        double[] vector = new double[matrix.length];
         double[][] rechenmatrix = new double[matrix.length][matrix.length];
         int a, b;
-        for(a=1; a<matrix.length; a++){
-            for(b=1; b<matrix.length; b++){
+        for(a=0; a<matrix.length; a++){
+            for(b=0; b<matrix.length; b++){
                 rechenmatrix[a][b] = matrix[a][b];
             }
         }
@@ -222,10 +221,9 @@ public class Mathe {
    */
     private static double [] matrizenErstellen2(double[][] matrix){
         double[] vector = new double[matrix.length];
-        double[][] rechenmatrix = new double[matrix.length][matrix.length];
         int a;
-        for(a=1; a<matrix.length; a++){
-            vector[a] = matrix[a][matrix.length-1];
+        for(a=0; a<matrix.length; a++){
+            vector[a] = matrix[a][matrix.length];
         }
         return vector;
     }
