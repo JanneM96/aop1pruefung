@@ -106,13 +106,12 @@ public class Mathe {
     /*
     * Diese Funktion formt die Hilfsmatrizen um
     */
-    private static void zeilenUmformen(double[][] rechenmatrix, double[] vector){
-        // Spalte, welche eine Zahl ungleich null besitzt
-        int merkeSpalte = 0;
-
+    private static void zeilenUmformen(double[][] matrix, double[] vector){
+        /*// Spalte, welche eine Zahl ungleich null besitzt
+        int merkeSpalte = -1;
         // Alle Zeilen a durchgehen
         for (int a = 0; a < rechenmatrix.length; a++) {
-            merkeSpalte = 0;
+            merkeSpalte = -1;
             //Alle Spalten b nach Wert ungleich 0 durchsuchen, c=Zeilenzähler
             for (int b = 0; b < rechenmatrix[a].length; b++) {
                 for (int c = a; c < rechenmatrix.length; c++) {
@@ -145,6 +144,14 @@ public class Mathe {
             for (int c = a + 1; c < rechenmatrix.length; c++) {
                 // Subtraktion um unter der Zahl nur 0en zu erreichen
                 zeilenSubtraktion(rechenmatrix[c][merkeSpalte], a, c, rechenmatrix, vector);
+            }
+        }
+        */
+        int a;
+        int b;
+        for(b=0; b<matrix.length; b++){
+            for(a= b+1; b<matrix.length; b++){
+                zeilenSubtraktion(matrix[b][b], a, b, matrix, vector);
             }
         }
     }
