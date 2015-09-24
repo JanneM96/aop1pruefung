@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -6,10 +7,11 @@ import java.io.IOException;
 
 public class Controller {
 
-    public double[][] getInput(String filename) throws IOException
+    public double[][] getInput(String filename)
     {
         Filemanager fm = new Filemanager();
-        String[] lines = fm.readFromFile(filename);
+        String[] lines = null;
+        lines = fm.readFromFile(filename);
         System.out.println("Eingegebenes LGS:");
         for (String line : lines)
         {
@@ -33,24 +35,30 @@ public class Controller {
         {
             String [] splitted = input[i].split(";");
             int spalten = splitted.length;
-            for (int j = 0; j < spalten; j++)
-            {
-                matrix [i][j] = Double.parseDouble(splitted[j]);
+            try {
+                for (int j = 0; j < spalten; j++)
+                {
+                    matrix [i][j] = Double.parseDouble(splitted[j]);
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Fehler beim Lesen der Datei: "+ e.getMessage());
+                System.exit(1);
             }
+
         }
        // Mathe.ablauf(matrix, rechenmatrix, vector);//Ablaufplan der Mathe wird einmal aufgerufen
         return matrix;
     }
 
-    public void doOutput(double[] dErgebnis)
+    public void doOutput(double[] dErgebnis, String filename)
     {
-        String [] umgewandelt = null;
+        String [] umgewandelt = new String[dErgebnis.length];
         for (int i = 0; i < dErgebnis.length; i++)
         {
             umgewandelt[i] = String.valueOf(dErgebnis[i]);
         }
         Filemanager fm = new Filemanager();
-        fm.writeToFile(umgewandelt);
+        fm.writeToFile(umgewandelt, filename);
     }
 
 }
