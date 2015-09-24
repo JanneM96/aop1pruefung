@@ -112,7 +112,7 @@ public class Mathe {
 
         // Alle Zeilen a durchgehen
         for (int a = 0; a < rechenmatrix.length; a++) {
-            merkeSpalte = -1;
+            merkeSpalte = 0;
             //Alle Spalten b nach Wert ungleich 0 durchsuchen, c=Zeilenzähler
             for (int b = 0; b < rechenmatrix[a].length; b++) {
                 for (int c = a; c < rechenmatrix.length; c++) {
@@ -122,7 +122,7 @@ public class Mathe {
                     }
                 }
                 // Abbruch wenn Zahl ungleich 0 gefunden
-                if (merkeSpalte != -1) {
+                if (merkeSpalte != 0) {
                     break;
                 }
             }
