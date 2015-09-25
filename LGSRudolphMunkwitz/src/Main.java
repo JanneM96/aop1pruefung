@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    //Übernimmt Dateipfad, lässt Daten auslesen aus Datei, übergibt diese zur Verarbeitung an Mathe
+    //und Lässt daten wieder speichern
     public static void berechnung(String filename){
         Controller control = new Controller();
         double[][] input = control.getInput(filename);
@@ -15,7 +17,6 @@ public class Main {
             System.out.println("x" + (i + 1) + " = " + loesung[i]);
         }
         control.doOutput(loesung, filename);
-
     }
 
 	public static void main(String[] args) {

@@ -12,7 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+//Nicht beendet
+/*
 public class GUI implements ActionListener{
     //Bestandteile
     Container p;
@@ -40,3 +41,4 @@ public class GUI implements ActionListener{
 
     }
 }
+*/

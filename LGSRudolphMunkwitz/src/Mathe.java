@@ -8,9 +8,7 @@ public class Mathe {
     */
     public static double[] ablauf(double[][] matrix){
         double [][] rechenmatrix = new double[matrix.length][matrix.length];
-        //rechenmatrix = null;
         double [] vector = new double[matrix.length];
-        //vector = null;
         Mathe.fehlerabfangen(matrix);
         double[] loesung = Mathe.dreiecksform(matrix);
         return(loesung);
@@ -55,7 +53,7 @@ public class Mathe {
     public static void abbruch(String msg)
     {
         System.out.println(msg);
-        System.exit(0);
+        System.exit(2);
     }
 
     /*
@@ -78,23 +76,18 @@ public class Mathe {
     Diese Funktion prüft die Diagonale, vertauscht Zeilen und ruft dann die Division auf.
      */
     private static double[][] zeilenUmformen(double[][] matrix) {
-        int a, b, c;
+        int a, b, c, sicherheitstest;
         double[] hilfe=new double[matrix.length];//Hilfearray zum zeilentausch
         //Diagonale auf 0en überprüfen, so tauschen, dass keine 0en mehr darin vorkommen
-        for(a=0; a<matrix.length; a++) {//Laufvariable um diagonale zu überprüfen
-            for (b = 1; b < matrix.length - 1; b++) {//Laufvariable zum zeilentausch, um tausch mit jeder Zeile zu ermöglichen
-                if (matrix[a][a] == 0) {
-                    for (c = 0; c < matrix.length; c++) {//Laufvariable, um jede spalte umzuschreiben
-                        hilfe[c] = matrix[a][c];//Zeilentausch
-                        matrix[a][c] = matrix[a + b][c];
-                        matrix[a + b][c] = hilfe[c];
-                    }
-                }
-                if (matrix[a][a] == 0) {
-                    for (c = 0; c < matrix.length; c++) {//Laufvariable, um jede spalte umzuschreiben
-                        hilfe[c] = matrix[a][c];//Zeilentausch
-                        matrix[a][c] = matrix[a - b][c];
-                        matrix[a - b][c] = hilfe[c];
+        for(sicherheitstest=0; sicherheitstest <4; sicherheitstest++){//mach es 3 mal durch, um fehler im sortieren zu vermeiden
+            for(a=0; a<matrix.length; a++) {//Laufvariable um diagonale zu überprüfen
+                for (b = matrix.length-1-a; b >= -a; b--) {//Laufvariable zum zeilentausch, um tausch mit jeder Zeile zu ermöglichen (unter & über dia)
+                    if (matrix[a][a] == 0) {
+                        for (c = 0; c < matrix.length; c++) {//Laufvariable, um jede spalte umzuschreiben
+                            hilfe[c] = matrix[a][c];//Zeilentausch
+                            matrix[a][c] = matrix[a + b][c];
+                            matrix[a + b][c] = hilfe[c];
+                        }
                     }
                 }
             }

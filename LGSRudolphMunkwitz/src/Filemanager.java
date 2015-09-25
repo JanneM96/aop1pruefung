@@ -5,7 +5,8 @@
 	import java.util.List;  
 	  
 	public class Filemanager   
-	{  
+	{
+		//Lesen eines Strings aus angegebern Datei
 	    public String[] readFromFile(String filename)
 	    {
 			FileReader fileReader = null;
@@ -31,10 +32,13 @@
 			}
 			return lines.toArray(new String[lines.size()]);
 	    }
+		//Quelle: http://www.technical-recipes.com/2011/reading-text-files-into-string-arrays-in-java/
 
+
+		//Schreiben eines Strings in angegebene Datei
 		public void writeToFile(String [] sErgebnis, String filename){
 
-			final String lineSeparator = System.getProperty("line.separator");
+			final String lineSeparator = System.getProperty("line.separator");//Zeilenumbruch für FileWriter
 			try {
 				FileWriter output = new FileWriter(filename, true);
 				output.write(lineSeparator);

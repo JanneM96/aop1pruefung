@@ -1,12 +1,9 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/**
- * Created by Alexander on 17.09.2015.
- */
-
 public class Controller {
 
+    //Lässt Dateimanager File einlesen und lässt String array in Methode split auseinandernehmen
     public double[][] getInput(String filename)
     {
         Filemanager fm = new Filemanager();
@@ -21,15 +18,11 @@ public class Controller {
         return splitted;
     }
 
+    //Zerlegt String Array in zahlen und speichert diese in form einer matrix
     private static double[][] split(String[] input)
     {
         int linesLength = input.length;
-        int zeile = 0;
         double [][] matrix = new double[linesLength][linesLength + 1];
-        double [][] rechenmatrix;
-        rechenmatrix = null;
-        double [] vector;
-        vector = null;
 
         for (int i = 0; i < linesLength; i++)
         {
@@ -50,6 +43,7 @@ public class Controller {
         return matrix;
     }
 
+    //Wandelt Ergebnis Array(double) in String um und lässt den Filemanager die Datei damit beschreiben
     public void doOutput(double[] dErgebnis, String filename)
     {
         String [] umgewandelt = new String[dErgebnis.length];
@@ -62,5 +56,3 @@ public class Controller {
     }
 
 }
-//Lieber Rudi, ich speichere die errechneten Daten für x1, x2, x3... in einer matrix namens speicher[],
-//speicher[0] ist x1, speicher[1] ist x2, .... du machst auch die ausgabe in die datei?
