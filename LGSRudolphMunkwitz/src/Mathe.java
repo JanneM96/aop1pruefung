@@ -1,5 +1,4 @@
-import java.io.*;
-import java.util.Arrays;
+
 public class Mathe {
     /*
     * Diese Funktion erfüllt die Funktion einer Art kleiner Main/Ablaufplan,

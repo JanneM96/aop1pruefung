@@ -10,12 +10,14 @@
 	    public String[] readFromFile(String filename)
 	    {
 			FileReader fileReader = null;
+
 			try {
 				fileReader = new FileReader(filename);
 			} catch (FileNotFoundException e) {
 				System.out.println("Fehler beim Lesen der Datei:" + e.getMessage());
 				System.exit(1);
 			}
+
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			List<String> lines = new ArrayList<String>();
 			String line = null;
@@ -30,6 +32,7 @@
 				System.out.println("Fehler beim Lesen der Datei:" + e.getMessage());
 				e.printStackTrace();
 			}
+
 			return lines.toArray(new String[lines.size()]);
 	    }
 		//Quelle: http://www.technical-recipes.com/2011/reading-text-files-into-string-arrays-in-java/
@@ -39,14 +42,17 @@
 		public void writeToFile(String [] sErgebnis, String filename){
 
 			final String lineSeparator = System.getProperty("line.separator");//Zeilenumbruch für FileWriter
+
 			try {
 				FileWriter output = new FileWriter(filename, true);
 				output.write(lineSeparator);
+
 				for (int i =0; i < sErgebnis.length; i++)
 				{
 					output.write("x"+(i+1)+" = "+sErgebnis[i]);
 					output.write(lineSeparator);
 				}
+
 				output.flush();
 				output.close();
 			} catch (IOException e) {

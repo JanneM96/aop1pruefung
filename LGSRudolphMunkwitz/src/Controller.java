@@ -10,10 +10,12 @@ public class Controller {
         String[] lines = null;
         lines = fm.readFromFile(filename);
         System.out.println("Eingegebenes LGS:");
+
         for (String line : lines)
         {
             System.out.println(line);
         }
+
         double[][] splitted = Controller.split(lines);
         return splitted;
     }
@@ -28,6 +30,7 @@ public class Controller {
         {
             String [] splitted = input[i].split(";");
             int spalten = splitted.length;
+
             try {
                 for (int j = 0; j < spalten; j++)
                 {
@@ -39,7 +42,6 @@ public class Controller {
             }
 
         }
-       // Mathe.ablauf(matrix, rechenmatrix, vector);//Ablaufplan der Mathe wird einmal aufgerufen
         return matrix;
     }
 
@@ -47,10 +49,12 @@ public class Controller {
     public void doOutput(double[] dErgebnis, String filename)
     {
         String [] umgewandelt = new String[dErgebnis.length];
+
         for (int i = 0; i < dErgebnis.length; i++)
         {
             umgewandelt[i] = String.valueOf(dErgebnis[i]);
         }
+
         Filemanager fm = new Filemanager();
         fm.writeToFile(umgewandelt, filename);
     }
